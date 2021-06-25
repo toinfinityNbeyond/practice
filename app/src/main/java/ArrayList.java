@@ -1,4 +1,4 @@
-package practice;
+
 
 public class ArrayList {
   static final int MAX_LENGTH = 100;
