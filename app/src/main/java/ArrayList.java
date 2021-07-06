@@ -2,29 +2,29 @@
 
 public class ArrayList {
   static final int MAX_LENGTH = 100;
-  static Object[] List = new Object[MAX_LENGTH];
-  static int size = 0;
+  Object[] List = new Object[MAX_LENGTH];
+  int size = 0;
 
-  static void append(Object obj) {
-    List[size++] = obj;
+  void append(Object obj) {
+    this.List[this.size++] = obj;
   } 
 
-  static Object[] toArray() {
-    Object[] arr = new Object[size];
-    for (int i = 0; i < size; i++) {
-      arr[i] = List[i];
+  Object[] toArray() {
+    Object[] arr = new Object[this.size];
+    for (int i = 0; i < this.size; i++) {
+      arr[i] = this.List[i];
     }
     return arr;
   } 
-  static Object retrieve(int index) {
-    return List[index];
+  Object retrieve(int index) {
+    return this.List[index];
   }
 
-  static void remove (int index) {
-    for (int i = index; i < size - 1; i++) {
-      List[i] = List[i + 1];
+  void remove (int index) {
+    for (int i = index; i < this.size - 1; i++) {
+      this.List[i] = this.List[i + 1];
     }
-    size--;
+    this.size--;
   }
 
 }

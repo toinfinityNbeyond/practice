@@ -3,7 +3,11 @@
 import java.util.Scanner;
 
 public class ComputeHandler implements Handler {
-  static Scanner keyScan;
+  Scanner keyScan;
+
+  ComputeHandler(Scanner keyscan) {
+    this.keyScan = keyScan;
+  }
 
   public void execute() {
     while (true) {
@@ -20,7 +24,7 @@ public class ComputeHandler implements Handler {
       }
 
       int a = Integer.parseInt(arr[0]);
-      int b = Integer.parseInt(arr[0]);
+      int b = Integer.parseInt(arr[2]);
 
       switch (arr[1]) {
         case "+":
