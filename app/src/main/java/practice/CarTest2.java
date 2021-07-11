@@ -1,5 +1,6 @@
 package practice;
 
+
 class Car {
   String color;     
   String gearType;  
@@ -19,6 +20,7 @@ class Car {
     this.door = door;
   }
 }
+
 class CarTeset2 {
   public static void main(String[] args) {
     Car c1 = new Car();   
