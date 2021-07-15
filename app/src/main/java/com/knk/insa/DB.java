@@ -6,25 +6,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class DB {
-  Connection conn = null;
-  PreparedStatement pstmt = null;
-  ResultSet rs = null;
-
-  String msg = "isud=crud쿼리문기술";
-  String uname = null;
-  String ujg = null;
-  int upay = 0;
-  String udp = null;
-  String uphone = null; //
+  Connection CN = null;
+  PreparedStatement PST = null;
+  ResultSet RS = null;
 
 
-  public Connection getConnection() {
-    Connection  CN = null;
+  public  Connection getConnection() {
+
     try {  
+      //127.0.0.1
       Class.forName("oracle.jdbc.driver.OracleDriver"); //오라클드라이브로드
-      conn=DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE","system","1234");
-      System.out.println("연결성공 3:03434534535");
-    }catch (Exception ex) {  System.out.println("db error= " + ex);}
+      CN= DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","1234");
+    }catch (Exception ex) {  System.out.println("0715 목요일 db error= " + ex);}
     return CN;
   }
 }

@@ -21,33 +21,35 @@ public class Kwak implements InsaM {
   public void insert() {
     try {
 
-      // 두번째 키보드에서 데이터를 입력
+
       int a = -1;
       while(a>10000 || a < 0) {
-        System.out.print("\n사번입력(4자릿수)>>>"); 
+        System.out.print("\n사번 : "); 
         a = Integer.parseInt(sc.nextLine());
         if (a>10000 || a < 0)
-          System.out.println("다시입력하세요");
+          System.out.println("잘못 입력하셨습니다.");
       }
-      System.out.print("이름입력>>>"); 
+      System.out.print("이름 :"); 
       String b = sc.nextLine();
-      System.out.print("직급입력>>>"); 
+      System.out.print("직급 :"); 
       String c = sc.nextLine();
-      System.out.print("연봉입력>>>"); 
+      System.out.print("연봉 :"); 
       int d = Integer.parseInt(sc.nextLine());
-      System.out.print("부서입력>>>"); 
+      System.out.print("부서 :"); 
       String e = sc.nextLine();
-      System.out.print("전화번호입력>>>"); 
+      System.out.print("전화번호 :"); 
       String f = sc.nextLine();
+      System.out.print("입사날짜 :"); 
+      String g = sc.nextLine();
 
-      // 3번째 쿼리문 완성
+
       ST = CN.createStatement();
-      msg = "insert into HR(num,name,jg,pay,dp,phone) values("+a+", '"+b+"', '"+c+"',"+d+",'"+e+"','"+f+"')";
-      System.out.println(msg);
+      msg = "insert into HR(num,name,jg,pay,dp,phone,wdate) values("+a+", '"+b+"', '"+c+"',"+d+",'"+e+"','"+f+"',to_date('"+g+"'))";
+
       int OK = ST.executeUpdate(msg);
       if (OK>0) {
-        System.out.println(a+" 코드 데이터 저장성공했습니다.");
-      } else {System.out.println(a+" 코드 데이터 저장 실패했습니다.");}
+        System.out.println(a+" 등록완료");
+      } else {System.out.println(a+" 등록실패");}
     } catch(Exception ex) { System.out.println("저장실패 " + ex); }
 
   }
@@ -56,23 +58,26 @@ public class Kwak implements InsaM {
 
     try {
 
-      System.out.print("검색하고 싶은 사번을 입력하세요 >>");
+      System.out.print("사번 : ");
       int num = sc.nextInt();
 
-      msg = ("select * from HR where num = " +num); // 문자열을 명령어로 인식해서 실행 하도록 Statement
+      ST = CN.createStatement();
+      msg = ("select * from HR where num ="+num); 
       RS = ST.executeQuery(msg);
       System.out.println();
+
       System.out.println("----------------- 데이터 출력 -----------------");
-      System.out.println("코 드\t이 름\t제 목\t날 짜\t\t조회수");
+      System.out.println("사 번\t이 름\t직 급\t연 봉 \t부 서\t전화번호\t입사날짜");
       while(RS.next() == true) {
-        // 필드에 접근해서 데이터를 가져올때 ge        txxx()
+
         int unum = RS.getInt("num");
         String uname = RS.getString("name");
-        java.util.Date ujg = RS.getDate("jg");
-        String upay = RS.getString("pay");
+        String ujg = RS.getString("jg");
+        int upay = RS.getInt("pay");
         String udp = RS.getString("dp");
         String uphone = RS.getString("phone");
-        System.out.println(unum +"\t" + uname+"\t" + ujg+"\t" + upay +"\t"+ udp +"\t"+ uphone+"\t");
+        String udate = RS.getString("wdate");
+        System.out.println(unum +"\t" + uname+"\t" + ujg+"\t" + upay +"\t"+ udp +"\t"+ uphone+"\t"+udate);
       }
     } catch(Exception ex) { }
 
@@ -80,26 +85,29 @@ public class Kwak implements InsaM {
 
   @Override
   public void select() {
-    // TODO Auto-generated method stub
 
   }
 
+
   @Override
   public void up() {
-    // TODO Auto-generated method stub
+
 
   }
 
   @Override
   public void del() {
-    // TODO Auto-generated method stub
+
 
   }
 
   @Override
   public void order() {
-    // TODO Auto-generated method stub
+
 
   }
+
+
+
 
 }

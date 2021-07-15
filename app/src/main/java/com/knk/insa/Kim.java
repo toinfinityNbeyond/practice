@@ -33,7 +33,7 @@ public class Kim implements InsaM {
 
       if (sc.nextLine().equals("y")) {
         System.out.println("------------------------데이터 조회------------------------");
-        System.out.println("사 번\t이 름\t직 급\t연 봉\t부 서\t연락처");
+        System.out.println("사 번\t이 름\t직 급\t연 봉\t부 서\t연락처\t\t입사날짜");
         ST = CN.createStatement();
         msg = "select * from HR";
         ResultSet rs = ST.executeQuery(msg);
@@ -44,7 +44,8 @@ public class Kim implements InsaM {
           int upay = rs.getInt("pay");
           String udp = rs.getString("dp");
           String uphone = rs.getString("phone");
-          System.out.println(unum  +"\t" +  uname +"\t"+ ujg +"\t" + upay +"\t"+ udp +"\t"+ uphone);
+          String udate = rs.getString("wdate");
+          System.out.println(unum  +"\t" +  uname +"\t"+ ujg +"\t" + upay +"\t"+ udp +"\t"+ uphone+"\t"+udate);
         }
         System.out.println("조회 완료되었습니다.");
       }else {

@@ -7,15 +7,17 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 public class Nam implements InsaM {
+
   Connection CN = null; 
   Statement ST = null; 
   ResultSet RS = null; 
   String msg = "isud=crud쿼리문기술";
   Scanner sc = new Scanner(System.in);
+  PreparedStatement PST=null ;
 
   public Nam() {
     DB db = new DB();
-    CN =    db.getConnection();
+    CN = db.getConnection();
   }
 
 
@@ -27,52 +29,27 @@ public class Nam implements InsaM {
 
   @Override
   public void select() {
-    //    try {
-    //      System.out.println("조회 하시겠습니까? (y/N)");
-    //
-    //      if (sc.nextLine().equals("y")) {
-    //        System.out.println("------------------------데이터 조회------------------------");
-    //        System.out.println("사 번\t이 름\t직 급\t연 봉\t부 서\t연락처");
-    //        ST = CN.createStatement();
-    //        msg = "select * from HR";
-    //        ResultSet rs = ST.executeQuery(msg);
-    //        /*RS = ST.executeQuery(msg);
-    //        ST = CN.createStatement();*/
-    //        while(rs.next()==true) {
-    //          String uname = rs.getString("name");
-    //          int unum = rs.getInt("num");
-    //          String ujg = rs.getString("jg");
-    //          int upay = rs.getInt("pay");
-    //          String udp = rs.getString("dp");
-    //          String uphone = rs.getString("phone");
-    //          System.out.println(unum  +"\t" +  uname +"\t"+ ujg +"\t" + upay +"\t"+ udp +"\t"+ uphone);
-    //        }
-    //        System.out.println("조회 완료되었습니다.");
-    //      }else {
-    //        System.out.println("조회 취소되었습니다.");
-    //      }
-    //      System.out.println("");
-    //    } catch (Exception e) {}
 
   }
 
 
   @Override
   public void ser() {
-    // TODO Auto-generated method stub
+
 
   }
 
   @Override
   public void up() {
-
-    String uname = null;
-    String ujg = null;
-    int upay = 0;
-    String udp = null;
-    String uphone = null;
-
     try {
+      String uname = null;
+      String ujg = null;
+      int upay = 0;
+      String udp = null;
+      String uphone = null;
+
+      select();
+
       System.out.println(" [정보 수정] ");
 
       System.out.print(" 수정하실 사번 입력 : " );
@@ -83,7 +60,8 @@ public class Nam implements InsaM {
       }
       System.out.println("------------------------------");
       System.out.print(" 이름을 변경하시겠습니까? (y/N) ");
-      if(!sc.nextLine().equals("y")) {
+      String flag1 = sc.nextLine();
+      if(!flag1.equals("y")) {
         System.out.println(" 이름변경 하지 않겠습니다.");
       } else { 
         System.out.println("------------------------------");
@@ -96,7 +74,8 @@ public class Nam implements InsaM {
       System.out.println("");
       System.out.println("------------------------------");
       System.out.print(" 직급을 변경하시겠습니까? (y/N) ");
-      if(!sc.nextLine().equals("y")) {
+      String flag2 = sc.nextLine();
+      if(!flag2.equals("y")) {
         System.out.println(" 직급변동 없음 ");
 
       } else {
@@ -109,7 +88,8 @@ public class Nam implements InsaM {
       System.out.println("");
       System.out.println("------------------------------");
       System.out.print(" 연봉을 변경하시겠습니까? (y/N) ");
-      if(!sc.nextLine().equals("y")) {
+      String flag3 = sc.nextLine();
+      if(!flag3.equals("y")) {
         System.out.println(" 급여변동 없음 ");
       } else {
         System.out.println("------------------------------");
@@ -120,7 +100,8 @@ public class Nam implements InsaM {
       System.out.println("");
       System.out.println("------------------------------");
       System.out.print(" 부서를 변경하시겠습니까? (y/N) ");
-      if(!sc.nextLine().equals("y")) {
+      String flag4 = sc.nextLine();
+      if(!flag4.equals("y")) {
         System.out.println(" 부서 변동 없음 ");
       } else {
         System.out.println("");
@@ -133,7 +114,8 @@ public class Nam implements InsaM {
       System.out.println("");
       System.out.println("------------------------------");
       System.out.print(" 연락처를 변경하시겠습니까? (y/N) ");
-      if(!sc.nextLine().equals("y")) {
+      String flag5 = sc.nextLine();
+      if(!flag5.equals("y")) {
         System.out.println(" 기존 연락처 유지");
       } else {
         System.out.println("------------------------------");
@@ -143,20 +125,55 @@ public class Nam implements InsaM {
         System.out.println("------------------------------");
       }
 
-      msg="update HR set num=?, name=?, jg=? , pay=?, dp=?, phone=? where code = ?";
-      PreparedStatement PST = CN.prepareStatement(msg);
-      PST.setInt(1, unum);
-      PST.setString(2, uname);
-      PST.setString(3, ujg );
-      PST.setInt(4, upay );
-      PST.setString(5, udp );
-      PST.setString(6, uphone );
-      int OK = PST.executeUpdate(); //PST.executeUpdate(X비어있음)
-      if(OK>0) { System.out.println(unum + "데이터 PST명령어 수정성공");}
-      else {System.out.println(unum + "데이터 PST명령어  수정실패");}
+      if(flag1.equals("y")) {
+        msg="update HR set name=? where num = ?";
+        PST = CN.prepareStatement(msg);
+        PST.setString(1, uname);
+        PST.setInt(2, unum );
+        int OK = PST.executeUpdate(); 
+      } if(flag2.equals("y")) {
+        msg = "update HR set jg=? where num = ?";
+        PST = CN.prepareStatement(msg);
+        PST.setString(1, ujg);
+        PST.setInt(2, unum);
+        int OK = PST.executeUpdate(); 
+      } if (flag3.equals("y")) {
+        msg = "update HR set pay=? where num = ?";
+        PST = CN.prepareStatement(msg);
+        PST.setInt(1, upay);
+        PST.setInt(2, unum);
+        int OK = PST.executeUpdate(); 
+      } if (flag4.equals("y")) {
+        msg = "update HR set dp=? where num = ?";
+        PST = CN.prepareStatement(msg);
+        PST.setString(1, udp);
+        PST.setInt(2, unum);
+        int OK = PST.executeUpdate(); 
+      } if (flag5.equals("y")) {
+        msg = "update HR set phone=? where num = ?";
+        PST = CN.prepareStatement(msg);
+        PST.setString(1, uphone);
+        PST.setInt(2, unum);
+        int OK = PST.executeUpdate(); 
 
 
-    }catch (Exception ex) {}
+      }
+
+
+      //if 조건절 상관없이 실해 
+      //      PST = CN.prepareStatement(msg);
+      //      PST.setString(1, uname);
+      //      PST.setString(1, ujg);
+      //      PST.setInt(1, upay );
+      //      PST.setString(1, udp );
+      //      PST.setString(1, uphone );
+      //      PST.setInt(2, unum );
+      //      int OK = PST.executeUpdate(); //PST.executeUpdate(X비어있음)
+      //      if(OK>0) { System.out.println(unum + "데이터 PST명령어 수정성공");}
+      //      else {System.out.println(unum + "데이터 PST명령어  수정실패");}
+
+
+    }catch (Exception ex) {System.out.println("error" + ex);}
 
 
   }
@@ -175,13 +192,13 @@ public class Nam implements InsaM {
       //삭제처리는 99% where 조건절 
       System.out.print("삭제이름 입력>>> ");
       String del = sc.nextLine();  //sc.next() 공백주면 분리 
-      msg = "delete from test  where name = '" +del +"'  ";
+      msg = "delete from HR where name = '" +del +"'  ";
       System.out.println(msg);
       ST = CN.createStatement();
       int OK = ST.executeUpdate(msg); //진짜삭제 
       if (OK>0) {
         System.out.println(del + "데이터 삭제성공");
-        select();
+        kim.select();
       }else {
         System.out.println(del + "데이터 삭제실패");
       } 
@@ -189,248 +206,13 @@ public class Nam implements InsaM {
 
   }
 
+
   @Override
   public void order() {
-
-    try {
-      System.out.println("정렬 기준을 선택하세요. 1.이름 2.사번");
-      //      System.out.println("정렬 방법을 선택하세요. 1.오름차순 2.내림차순");
-      int od = 2;
-      od = Integer.parseInt(sc.nextLine());
-      switch(od) {
-        case 1: 
-          System.out.println("정렬 방법을 선택하세요. 1.오름차순 2.내림차순");
-          od = Integer.parseInt(sc.nextLine());
-          switch(od) {
-            case 1: name_asc(); break;
-            case 2: name_desc(); break;
-            default:System.out.println("잘못된 명령어입니다.");
-          } break;
-
-        case 2: 
-          System.out.println("정렬 방법을 선택하세요. 1.오름차순 2.내림차순");
-          od = Integer.parseInt(sc.nextLine());
-          switch(od) {
-            case 1: num_asc(); break;
-            case 2: num_desc(); break;
-            default: System.out.println("잘못된 명령어입니다.");
-          }break;
-
-        default:
-          System.out.println("잘못된 명령어입니다.");
-
-      }//switch end
-    }catch(Exception e) {}
+    // TODO Auto-generated method stub
 
   }
 
 
 
-
-
-
-
-  //    try {  
-  //      System.out.println("정렬 기준을 선택하세요. 1.이름 2.사번");
-  //      int od = 3; 
-  //      od = Integer.parseInt(sc.nextLine());
-  //      if (od == 1 ) {
-  //        if(od == 1) {
-  //          System.out.println("정렬 방법을 선택하세요. 1.오름차순 2.내림차순");
-  //          od = Integer.parseInt(sc.nextLine());
-  //          System.out.println("------------------------데이터 정렬------------------------");
-  //          System.out.println("사 번\t이 름\t직 급\t연 봉\t부 서\t\t전화번호");
-  //          /*RS = ST.executeQuery(msg);
-  //          ST = CN.createStatement();*/
-  //
-  //          ST = CN.createStatement();
-  //          msg ="select  * from  HR  order by name";
-  //          ResultSet rs = ST.executeQuery(msg);
-  //
-  //          while(rs.next()==true) {
-  //            String uname = rs.getString("name");
-  //            int unum = rs.getInt("num");
-  //            String ujg = rs.getString("jg");
-  //            int upay = rs.getInt("pay");
-  //            String udp = rs.getString("dp");
-  //            int uphone = rs.getInt("phone");
-  //
-  //            System.out.println( uname + "\t"+ unum  +"\t" + ujg + "\t" + upay +"\t"+ udp + "\t" + uphone);
-  //          }// while
-  //          System.out.println();
-  //          System.out.println("이름 기준 오름차순으로 정렬되었습니다.");}
-  //
-  //        else {
-  //          System.out.println("정렬 방법을 선택하세요. 1.오름차순 2.내림차순");
-  //          od = Integer.parseInt(sc.nextLine());
-  //          System.out.println("------------------------데이터 정렬------------------------");
-  //          System.out.println("사 번\t이 름\t직 급\t연 봉\t부 서\t전화번호");
-  //          /* RS = ST.executeQuery(msg);
-  //          ST = CN.createStatement(); */
-  //          System.out.println("test1");
-  //          ST = CN.createStatement();
-  //          msg ="select  * from  HR  order by decs Name";
-  //          ResultSet rs = ST.executeQuery(msg);
-  //          System.out.println("test2");
-  //          while(rs.next()==true) {
-  //            String uname = rs.getString("name");
-  //            int unum = rs.getInt("num");
-  //            String ujg = rs.getString("jg");
-  //            int upay = rs.getInt("pay");
-  //            String udp = rs.getString("dp");
-  //            int uphone = rs.getInt("phone");
-  //            System.out.println("test3");
-  //            System.out.println( uname + "\t"+ unum  +"\t" + ujg + "\t" + upay +"\t"+ udp + "\t" + uphone);
-  //          }    
-  //          System.out.println();
-  //          System.out.println("이름 기준 내림차순으로 정렬되었습니다.");
-  //        }
-  //      }else if (od ==2) {
-  //        if(od == 1) {
-  //          System.out.println("정렬 방법을 선택하세요. 1.오름차순 2.내림차순");
-  //          od = Integer.parseInt(sc.nextLine());
-  //          System.out.println();
-  //          System.out.println("사 번\t이 름\t직 급\t연 봉\t부 서\t전화번호");
-  //          ST = CN.createStatement();
-  //          msg ="select  * from  HR  order by name";
-  //          ResultSet rs = ST.executeQuery(msg);
-  //          /*RS = ST.executeQuery(msg);
-  //          ST = CN.createStatement(); */
-  //          String uname = rs.getString("name");
-  //          int unum = rs.getInt("num");
-  //          String ujg = rs.getString("jg");
-  //          int upay = rs.getInt("pay");
-  //          String udp = rs.getString("dp");
-  //          int uphone = rs.getInt("phone");
-  //
-  //          System.out.println(uname+ unum  + ujg + upay + udp + uphone);
-  //          System.out.println();
-  //
-  //          System.out.println("사번 기준 오름차순으로 정렬되었습니다.");
-  //        } else {
-  //          od = Integer.parseInt(sc.nextLine());
-  //          System.out.println();
-  //          System.out.println("사 번\t이 름\t직 급\t연 봉\t부 서\t전화번호");
-  //          ST = CN.createStatement();
-  //          msg ="select  * from  HR  order by desc name";
-  //          ResultSet rs = ST.executeQuery(msg);
-  //          /*RS = ST.executeQuery(msg);
-  //          ST = CN.createStatement();*/
-  //          String uname = rs.getString("name");
-  //          int unum = rs.getInt("num");
-  //          String ujg = rs.getString("jg");
-  //          int upay = rs.getInt("pay");
-  //          String udp = rs.getString("dp");
-  //          int uphone = rs.getInt("phone");
-  //
-  //          System.out.println(uname+ unum   + ujg + upay + udp + uphone);
-  //          System.out.println();
-  //
-  //          System.out.println("사번 기준 내림차순으로 정렬되었습니다.");
-  //        }
-  //      } else {System.out.println("잘못된 명령어입니다.");}
-  //    } catch (Exception e) { }
-  //
-  //  }
-
-  public  void name_asc() {
-    try {
-      System.out.println("------------------------데이터 정렬------------------------");
-      System.out.println("사 번\t이 름\t직 급\t연 봉\t부 서\t연락처");
-      ST = CN.createStatement();
-      msg ="select  * from  HR  order by name";
-      ResultSet rs = ST.executeQuery(msg);
-      while(rs.next()==true) {
-        String uname = rs.getString("name");
-        int unum = rs.getInt("num");
-        String ujg = rs.getString("jg");
-        int upay = rs.getInt("pay");
-        String udp = rs.getString("dp");
-        int uphone = rs.getInt("phone");
-
-        System.out.println(  unum + "\t"+ uname  +"\t" + ujg + "\t" + upay +"\t"+ udp + "\t" + uphone);
-      }// while
-      System.out.println();
-      System.out.println("이름 기준 오름차순으로 정렬되었습니다.");
-
-    }catch (Exception e) {}
-  }
-
-
-  public  void name_desc() {
-    try {
-      System.out.println("------------------------데이터 정렬------------------------");
-      System.out.println("사 번\t이 름\t직 급\t연 봉\t부 서\t연락처");
-      ST = CN.createStatement();
-      msg ="select  * from  HR  order by name desc";
-      ResultSet rs = ST.executeQuery(msg);
-
-      while(rs.next()==true) {
-        String uname = rs.getString("name");
-        int unum = rs.getInt("num");
-        String ujg = rs.getString("jg");
-        int upay = rs.getInt("pay");
-        String udp = rs.getString("dp");
-        int uphone = rs.getInt("phone");
-
-        System.out.println( unum + "\t"+ uname  +"\t" + ujg + "\t" + upay +"\t"+ udp + "\t" + uphone);
-      }// while
-      System.out.println();
-      System.out.println("이름 기준 내림차순으로 정렬되었습니다.");
-
-    }catch (Exception e) {}
-  }
-
-
-
-  public  void num_asc() {
-    try {
-      System.out.println("------------------------데이터 정렬------------------------");
-      System.out.println("사 번\t이 름\t직 급\t연 봉\t부 서\t연락처");
-      ST = CN.createStatement();
-      msg ="select  * from  HR  order by num";
-      ResultSet rs = ST.executeQuery(msg);
-      while(rs.next()==true) {
-        String uname = rs.getString("name");
-        int unum = rs.getInt("num");
-        String ujg = rs.getString("jg");
-        int upay = rs.getInt("pay");
-        String udp = rs.getString("dp");
-        int uphone = rs.getInt("phone");
-
-        System.out.println( unum + "\t"+ uname  +"\t" + ujg + "\t" + upay +"\t"+ udp + "\t" + uphone);
-      }// while
-      System.out.println();
-      System.out.println("사번 기준 오름차순으로 정렬되었습니다.");
-
-    }catch (Exception e) {}
-  }
-
-
-  public  void num_desc() {
-    try {
-      System.out.println("------------------------데이터 정렬------------------------");
-      System.out.println("사 번\t이 름\t직 급\t연 봉\t부 서\t연락처");
-      ST = CN.createStatement();
-      msg ="select  * from  HR  order by num desc";
-      ResultSet rs = ST.executeQuery(msg);
-      while(rs.next()==true) {
-        String uname = rs.getString("name");
-        int unum = rs.getInt("num");
-        String ujg = rs.getString("jg");
-        int upay = rs.getInt("pay");
-        String udp = rs.getString("dp");
-        String uphone = rs.getString("phone");
-
-        System.out.println( unum + "\t"+ uname  +"\t" + ujg + "\t" + upay +"\t"+ udp + "\t" + uphone);
-      }// while
-      System.out.println();
-      System.out.println("사번 기준 내림차순으로 정렬되었습니다.");
-
-    }catch (Exception e) {}
-  }
-
-
-
-}//END
-
+}
