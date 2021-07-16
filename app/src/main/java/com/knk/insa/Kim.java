@@ -111,7 +111,7 @@ public class Kim implements InsaM {
   public  void name_asc() {
     try {
       System.out.println("------------------------데이터 정렬------------------------");
-      System.out.println("사 번\t이 름\t직 급\t연 봉\t부 서\t연락처");
+      System.out.println("사 번\t이 름\t직 급\t연 봉\t부 서\t연락처\t\t입사날짜");
       ST = CN.createStatement();
       msg ="select  * from  HR  order by name";
       ResultSet rs = ST.executeQuery(msg);
@@ -122,8 +122,9 @@ public class Kim implements InsaM {
         int upay = rs.getInt("pay");
         String udp = rs.getString("dp");
         int uphone = rs.getInt("phone");
+        String udate = rs.getString("wdate");
 
-        System.out.println(  unum + "\t"+ uname  +"\t" + ujg + "\t" + upay +"\t"+ udp + "\t" + uphone);
+        System.out.println(  unum + "\t"+ uname  +"\t" + ujg + "\t" + upay +"\t"+ udp + "\t" + uphone + "\t" + udate);
       }// while
       System.out.println();
       System.out.println("이름 기준 오름차순으로 정렬되었습니다.");
@@ -135,7 +136,7 @@ public class Kim implements InsaM {
   public  void name_desc() {
     try {
       System.out.println("------------------------데이터 정렬------------------------");
-      System.out.println("사 번\t이 름\t직 급\t연 봉\t부 서\t연락처");
+      System.out.println("사 번\t이 름\t직 급\t연 봉\t부 서\t연락처\t\t입사날짜");
       ST = CN.createStatement();
       msg ="select  * from  HR  order by name desc";
       ResultSet rs = ST.executeQuery(msg);
@@ -147,8 +148,9 @@ public class Kim implements InsaM {
         int upay = rs.getInt("pay");
         String udp = rs.getString("dp");
         int uphone = rs.getInt("phone");
+        String udate = rs.getString("wdate");
 
-        System.out.println( unum + "\t"+ uname  +"\t" + ujg + "\t" + upay +"\t"+ udp + "\t" + uphone);
+        System.out.println( unum + "\t"+ uname  +"\t" + ujg + "\t" + upay +"\t"+ udp + "\t" + uphone + "\t" + udate);
       }// while
       System.out.println();
       System.out.println("이름 기준 내림차순으로 정렬되었습니다.");
@@ -160,7 +162,7 @@ public class Kim implements InsaM {
   public  void num_asc() {
     try {
       System.out.println("------------------------데이터 정렬------------------------");
-      System.out.println("사 번\t이 름\t직 급\t연 봉\t부 서\t연락처");
+      System.out.println("사 번\t이 름\t직 급\t연 봉\t부 서\t연락처\t\t입사날짜");
       ST = CN.createStatement();
       msg ="select  * from  HR  order by num";
       ResultSet rs = ST.executeQuery(msg);
@@ -171,8 +173,9 @@ public class Kim implements InsaM {
         int upay = rs.getInt("pay");
         String udp = rs.getString("dp");
         int uphone = rs.getInt("phone");
+        String udate = rs.getString("wdate");
 
-        System.out.println( unum + "\t"+ uname  +"\t" + ujg + "\t" + upay +"\t"+ udp + "\t" + uphone);
+        System.out.println( unum + "\t"+ uname  +"\t" + ujg + "\t" + upay +"\t"+ udp + "\t" + uphone + "\t" + udate);
       }// while
       System.out.println();
       System.out.println("사번 기준 오름차순으로 정렬되었습니다.");
@@ -184,7 +187,7 @@ public class Kim implements InsaM {
   public  void num_desc() {
     try {
       System.out.println("------------------------데이터 정렬------------------------");
-      System.out.println("사 번\t이 름\t직 급\t연 봉\t부 서\t연락처");
+      System.out.println("사 번\t이 름\t직 급\t연 봉\t부 서\t연락처\t\t입사날짜");
       ST = CN.createStatement();
       msg ="select  * from  HR  order by num desc";
       ResultSet rs = ST.executeQuery(msg);
@@ -195,8 +198,9 @@ public class Kim implements InsaM {
         int upay = rs.getInt("pay");
         String udp = rs.getString("dp");
         String uphone = rs.getString("phone");
+        String udate = rs.getString("wdate");
 
-        System.out.println( unum + "\t"+ uname  +"\t" + ujg + "\t" + upay +"\t"+ udp + "\t" + uphone);
+        System.out.println( unum + "\t"+ uname  +"\t" + ujg + "\t" + upay +"\t"+ udp + "\t" + uphone + "\t" + udate);
       }// while
       System.out.println();
       System.out.println("사번 기준 내림차순으로 정렬되었습니다.");

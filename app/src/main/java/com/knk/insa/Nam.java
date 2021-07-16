@@ -47,6 +47,7 @@ public class Nam implements InsaM {
       int upay = 0;
       String udp = null;
       String uphone = null;
+      String udate = null;
 
       select();
 
@@ -125,6 +126,20 @@ public class Nam implements InsaM {
         System.out.println("------------------------------");
       }
 
+      System.out.println("");
+      System.out.println("------------------------------");
+      System.out.print(" 입사날짜를 변경하시겠습니까? (y/N) ");
+      String flag6 = sc.nextLine();
+      if(!flag5.equals("y")) {
+        System.out.println(" 기존 입사날짜 유지");
+      } else {
+        System.out.println("------------------------------");
+        System.out.print(" 변경된 입사날짜 : ");
+        uphone = sc.nextLine();
+        System.out.printf("%s 변경완료 " , udate);
+        System.out.println("------------------------------");
+      }
+
       if(flag1.equals("y")) {
         msg="update HR set name=? where num = ?";
         PST = CN.prepareStatement(msg);
@@ -155,8 +170,12 @@ public class Nam implements InsaM {
         PST.setString(1, uphone);
         PST.setInt(2, unum);
         int OK = PST.executeUpdate(); 
-
-
+      } if (flag6.equals("y")) {
+        msg = "update HR set udate=? where num = ?";
+        PST = CN.prepareStatement(msg);
+        PST.setString(1, udate);
+        PST.setInt(2, unum);
+        int OK = PST.executeUpdate(); 
       }
 
 

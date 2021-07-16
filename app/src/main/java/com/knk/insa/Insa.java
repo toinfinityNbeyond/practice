@@ -12,7 +12,7 @@ public class Insa {
   ResultSet RS = null; // select 조회결과 값 전체 데이터를 기억합니다.
   String msg = "isud=crud쿼리문기술";
   Scanner sc = new Scanner(System.in);
-  int Gtotal = 0; // 조회갯수72 /  전체갯수349 전체갯수 = gtotal
+
 
 
   public static void main(String[] args) {
@@ -21,6 +21,7 @@ public class Insa {
 
     dt.dbq();
     dt.sc.close();
+
 
 
   }
@@ -39,29 +40,48 @@ public class Insa {
       //System.out.println("오라클 계정 비번 드라이버 연결");
       System.out.println("인사관리 로그인");
       ST = CN.createStatement();  // 첫번째 명령어 생성
+
       loop: while(true) {
         System.out.print("ID : ");
         String getid =sc.nextLine();
-        System.out.print("PW : ");
-        String getpw =sc.nextLine();
+        //        System.out.print("PW : ");
+        //        String getpw =sc.nextLine();
 
-        msg = "select count(*) as temp from log where id ='"+getid+"'  and pw ='" + getpw + "'";
+
+        msg = "select count(*) as temp from log where id ='"+getid+"'";
         //msg = "select count(*) as temp from log where id ='"+getid+"'  and pw ='" + getpw + "'";
 
 
         RS = ST.executeQuery(msg);
-        String id1 = "";
+
         if(RS.next() == true) {
-          //id1 = RS.getString("id");
+
           int data = RS.getInt("temp");
           if (data >0)  { 
-            System.out.println( getid +" 로그인 되었습니다.");
-            break loop;
+            System.out.print("PW : ");
+            String getpw = sc.nextLine();
+
+
+
+            msg = "select count(*) as temp from log where id ='"+getid+"'  and pw ='" + getpw + "'";
+
+            RS = ST.executeQuery(msg);
+            if(RS.next() == true) {
+              int data2 = RS.getInt("temp");
+
+              switch (data2) {
+                case 1: System.out.println("성공");break loop;
+                default: System.out.println("틀린 비밀번호 입니다.");break;
+              } 
+            }
+
+
+          }else { 
+            System.out.println("ID가 틀렸습니다.\n");
           }
 
-          else { 
-            System.out.println("ID 또는 PW가 틀렸습니다.\n");
-          }
+
+
 
 
 
