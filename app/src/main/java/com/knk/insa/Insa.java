@@ -28,9 +28,9 @@ public class Insa {
 
 
   public void dbq() {
-    Kwak kw = new Kwak();
-    Kim kim = new Kim();
-    Nam nam = new Nam();
+    KwakE kw = new KwakE();
+    KimE kim = new KimE();
+    NamE nam = new NamE();
 
 
     try {
