@@ -19,8 +19,11 @@ public class KwakE implements InsaM {
   }
 
   public void insert() {
+    KimE kimE = new KimE();
+    Insa is = new Insa();
     try {
 
+      kimE.delselect();
 
       int a = -1;
       while(a>10000 || a < 0) {
@@ -41,7 +44,15 @@ public class KwakE implements InsaM {
       String f = sc.nextLine();
       System.out.print("Date of joining ex)YY/MM/DD : "); 
       String g = sc.nextLine();
-
+      System.out.println("Do you want to register? (y/N)");
+      String h = sc.nextLine();
+      if(h.equals("y")) {
+        System.out.println("Registration completed");
+      }
+      else {
+        System.out.println("Unregister");
+        is.menu();
+      }
 
       ST = CN.createStatement();
       msg = "insert into HR(num,name,jg,pay,dp,phone,wdate) values("+a+", '"+b+"', '"+c+"',"+d+",'"+e+"','"+f+"',to_date('"+g+"'))";
@@ -66,7 +77,7 @@ public class KwakE implements InsaM {
       RS = ST.executeQuery(msg);
       System.out.println();
 
-      System.out.println("-----------------------------Data List------------------------------");
+      System.out.println("-----------------------------Data List-------------------------------");
       System.out.println("Number\tName\tPosition\tPay\tDepartment\tPhone number\t\tDate of joining");
       while(RS.next() == true) {
 

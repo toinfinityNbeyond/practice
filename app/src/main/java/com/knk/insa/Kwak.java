@@ -9,7 +9,7 @@ public class Kwak implements InsaM {
   Connection CN = null; 
   Statement ST = null; 
   ResultSet RS = null; 
-  String msg = "isud=crud쿼리문기술";
+  String msg = "";
   Scanner sc = new Scanner(System.in);
 
 
@@ -19,38 +19,49 @@ public class Kwak implements InsaM {
   }
 
   public void insert() {
-    try {
+    Insa is = new Insa();
+    Kim kim = new Kim();
 
+
+    try {
+      kim.delselect();
 
       int a = -1;
       while(a>10000 || a < 0) {
         System.out.print("\n사번 : "); 
         a = Integer.parseInt(sc.nextLine());
         if (a>10000 || a < 0)
-          System.out.println("잘못 입력하셨습니다.");
+          System.out.println("잘못된 명령어입니다.");
       }
-      System.out.print("이름 :"); 
+      System.out.print("이름 : "); 
       String b = sc.nextLine();
-      System.out.print("직급 :"); 
+      System.out.print("직급 : "); 
       String c = sc.nextLine();
-      System.out.print("연봉 :"); 
+      System.out.print("연봉 : "); 
       int d = Integer.parseInt(sc.nextLine());
-      System.out.print("부서 :"); 
+      System.out.print("부서 : "); 
       String e = sc.nextLine();
-      System.out.print("전화번호 :"); 
+      System.out.print("연락처( - 제외) : "); 
       String f = sc.nextLine();
-      System.out.print("입사날짜 :"); 
+      System.out.print("입사일 ex)YY/MM/DD : "); 
       String g = sc.nextLine();
-
-
+      System.out.println("등록하시겠습니까? (y/N)");
+      String h = sc.nextLine();
+      if(h.equals("y")) {
+        System.out.println("등록완료");
+      }
+      else {
+        System.out.println("등록취소");
+        is.menu();
+      }
       ST = CN.createStatement();
       msg = "insert into HR(num,name,jg,pay,dp,phone,wdate) values("+a+", '"+b+"', '"+c+"',"+d+",'"+e+"','"+f+"',to_date('"+g+"'))";
 
       int OK = ST.executeUpdate(msg);
       if (OK>0) {
-        System.out.println(a+" 등록완료");
-      } else {System.out.println(a+" 등록실패");}
-    } catch(Exception ex) { System.out.println("저장실패 " + ex); }
+        System.out.println(a+"번 등록완료");
+      } else {System.out.println(a+"번 등록실패");}
+    } catch(Exception ex) { System.out.println("다시 입력하세요."); }
 
   }
 
@@ -66,8 +77,8 @@ public class Kwak implements InsaM {
       RS = ST.executeQuery(msg);
       System.out.println();
 
-      System.out.println("----------------- 데이터 출력 -----------------");
-      System.out.println("사 번\t이 름\t직 급\t연 봉 \t부 서\t전화번호\t입사날짜");
+      System.out.println("--------------------------데이터 조회----------------------------");
+      System.out.println("사 번\t이 름\t직 급\t연 봉\t부 서\t연락처\t\t입사일");
       while(RS.next() == true) {
 
         int unum = RS.getInt("num");
@@ -77,9 +88,9 @@ public class Kwak implements InsaM {
         String udp = RS.getString("dp");
         String uphone = RS.getString("phone");
         String udate = RS.getString("wdate");
-        System.out.println(unum +"\t" + uname+"\t" + ujg+"\t" + upay +"\t"+ udp +"\t"+ uphone+"\t"+udate);
+        System.out.println(unum + "\t" + uname + "\t" + ujg + "\t"  + upay + "\t" + udp + "\t" + uphone + "\t" +udate);
       }
-    } catch(Exception ex) { }
+    } catch(Exception ex) {System.out.println("다시 입력하세요.");}
 
   }
 
@@ -108,6 +119,10 @@ public class Kwak implements InsaM {
   }
 
 
+  @Override
+  public void delselect() {
+    // TODO Auto-generated method stub
 
+  }
 
 }

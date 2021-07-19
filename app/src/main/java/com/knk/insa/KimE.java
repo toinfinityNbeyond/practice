@@ -32,8 +32,8 @@ public class KimE implements InsaM {
       System.out.println("Do you want to look up the data? (y/N)");
 
       if (sc.nextLine().equals("y")) {
-        System.out.println("-----------------------------Data List------------------------------");
-        System.out.println("Number\tName\tPosition\tPay\tDepartment\tcontact\t\tDate of joining");
+        System.out.println("-----------------------------Data List-------------------------------");
+        System.out.println("Num\tName\tPosition\tPay\tDepartment\tPhone num\t\tDate of joining");
         ST = CN.createStatement();
         msg = "select * from HR";
         ResultSet rs = ST.executeQuery(msg);
@@ -114,8 +114,8 @@ public class KimE implements InsaM {
 
   public  void name_asc() {
     try {
-      System.out.println("-----------------------------Data List------------------------------");
-      System.out.println("Number\tName\tPosition\tPay\tDepartment\tcontact\t\tDate of joining");
+      System.out.println("-----------------------------Data List-------------------------------");
+      System.out.println("Num\tName\tPosition\tPay\tDepartment\tPhone num\t\tDate of joining");
       ST = CN.createStatement();
       msg ="select  * from  HR  order by name";
       ResultSet rs = ST.executeQuery(msg);
@@ -139,8 +139,8 @@ public class KimE implements InsaM {
 
   public  void name_desc() {
     try {
-      System.out.println("-----------------------------Data List------------------------------");
-      System.out.println("Number\tName\tPosition\tPay\tDepartment\tcontact\t\tDate of joining");
+      System.out.println("-----------------------------Data List-------------------------------");
+      System.out.println("Num\tName\tPosition\tPay\tDepartment\tPhone num\t\tDate of joining");
       ST = CN.createStatement();
       msg ="select  * from  HR  order by name desc";
       ResultSet rs = ST.executeQuery(msg);
@@ -166,8 +166,8 @@ public class KimE implements InsaM {
 
   public  void num_asc() {
     try {
-      System.out.println("-----------------------------Data List------------------------------");
-      System.out.println("Number\tName\tPosition\tPay\tDepartment\tcontact\t\tDate of joining");
+      System.out.println("-----------------------------Data List-------------------------------");
+      System.out.println("Num\tName\tPosition\tPay\tDepartment\tPhone num\t\tDate of joining");
       ST = CN.createStatement();
       msg ="select  * from  HR  order by num";
       ResultSet rs = ST.executeQuery(msg);
@@ -191,7 +191,7 @@ public class KimE implements InsaM {
 
   public  void num_desc() {
     try {
-      System.out.println("-----------------------------Data List------------------------------");
+      System.out.println("-----------------------------Data List-------------------------------");
       System.out.println("Num\tName\tPosition\tPay\tDepartment\tPhone num\t\tDate of joining");
       ST = CN.createStatement();
       msg ="select  * from  HR  order by num desc";
@@ -220,8 +220,8 @@ public class KimE implements InsaM {
       // TODO Auto-generated method stub
       System.out.println("Retrieving data....");
       Thread.sleep(3000);
-      System.out.println("-----------------------------Data List------------------------------");
-      System.out.println("Number\tName\tPosition\tPay\tDepartment\tcontact\t\tDate of joining");
+      System.out.println("-----------------------------Data List-------------------------------");
+      System.out.println("Num\tName\tPosition\tPay\tDepartment\tPhone num\t\tDate of joining");
       ST = CN.createStatement();
       msg = "select * from HR";
       ResultSet rs = ST.executeQuery(msg);
@@ -235,7 +235,7 @@ public class KimE implements InsaM {
         String udate = rs.getString("wdate");
 
         System.out.println(unum  +"\t"+ uname +"\t"+ ujg +"\t"+ upay +"\t"+ udp +"\t"+ uphone +"\t"+ udate);
-        System.out.println();
+
       }
 
     }catch (Exception ex) {}

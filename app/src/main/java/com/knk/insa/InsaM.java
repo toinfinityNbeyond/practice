@@ -7,6 +7,7 @@ public interface InsaM {
   public void up();
   public void del();
   public void order();
+  public void delselect();
 
 
 }

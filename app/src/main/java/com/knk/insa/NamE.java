@@ -179,12 +179,23 @@ public class NamE implements InsaM {
   @Override
   public void del() {
     Kim kim = new Kim();
+    Insa is = new Insa();
 
     try {
       kim.delselect();
 
       System.out.print("Enter Delete Name :  ");
       String del = sc.nextLine();
+
+      System.out.println("Are you sure you want to delete it? (y/N)");
+      String h = sc.nextLine();
+      if(h.equals("y")) {
+        System.out.println("Start Delete");
+      } else {
+        System.out.println("Undelete");
+        is.menu();
+      }
+
       msg = "delete from HR where name = '" +del +"'  ";
       ST = CN.createStatement();
       int OK = ST.executeUpdate(msg); 
