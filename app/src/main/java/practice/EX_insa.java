@@ -10,7 +10,7 @@ public class EX_insa   {
   Connection CN = null; // 연결객체 생성
   Statement ST = null; // 실행객체 생성
   ResultSet RS = null; // 결과객체 생성
-  String msg = "isud=crud쿼리문기술";
+  String msg = "";
   Scanner sc = new Scanner(System.in);
 
   Kim kim = new Kim();
@@ -43,7 +43,7 @@ public class EX_insa   {
       switch(sel) {
         case "1": min.add(); break;
         case "2": min.view(); break;
-        case"3": kim.search(); break;
+        case "3": kim.search(); break;
         case "4": kim.update(); break;
         case "5": kim.order(); break;
         case "6": luna.delete(); break;
