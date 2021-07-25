@@ -20,6 +20,12 @@ public class Min implements EX_insaM {
         System.out.println("등록하실 사번 입력>>");
 
       }
+      System.out.println("이름 >>");
+      System.out.println("부서 >>");
+      System.out.println("직급 >>");
+      System.out.println("연봉 >>");
+      System.out.println("연락처 >>");
+      System.out.println("입사일 >>");
 
 
 
