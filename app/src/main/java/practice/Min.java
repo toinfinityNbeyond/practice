@@ -34,6 +34,7 @@ public class Min implements EX_insaM {
   }
   @Override
   public void view() { //
+    System.out.println("조회하시겠습니까?(y/N)");
 
   }
 
