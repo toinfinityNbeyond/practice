@@ -1,9 +1,16 @@
 package practice;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Scanner;
 
 public class Min implements EX_insaM {
 
+  Connection CN = null; // 연결객체 생성
+  Statement ST = null; // 실행객체 생성
+  ResultSet RS = null; // 결과객체 생성
+  String msg = "";
   Scanner sc = new Scanner(System.in);
 
   public static void main(String[] args) {
