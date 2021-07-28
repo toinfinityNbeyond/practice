@@ -36,6 +36,12 @@ public class Min implements EX_insaM {
   public void view() { //
     System.out.println("조회하시겠습니까?(y/N)");
 
+    if (sc.nextLine().equals("y")) {
+      System.out.println("--------------조회------------");
+      System.out.println("사번\t이름\t부서\t직급\t연봉\t연락처\t입사일");
+
+    }
+
   }
 
   @Override
