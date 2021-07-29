@@ -41,14 +41,18 @@ public class Min implements EX_insaM {
   }
   @Override
   public void view() { //
-    System.out.println("조회하시겠습니까?(y/N)");
 
-    if (sc.nextLine().equals("y")) {
-      System.out.println("--------------조회------------");
-      System.out.println("사번\t이름\t부서\t직급\t연봉\t연락처\t입사일");
+    try {
+      System.out.println("조회하시겠습니까?(y/N)");
 
-    }
-
+      if (sc.nextLine().equals("y")) {
+        System.out.println("--------------조회------------");
+        System.out.println("사번\t이름\t부서\t직급\t연봉\t연락처\t입사일");
+        ST = CN.createStatement();
+        msg = "select * from HR";
+        ResultSet rs = ST.executeQuery(msg);
+      }
+    }catch(Exception e) {}
   }
 
   @Override
